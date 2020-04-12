@@ -8,13 +8,21 @@
 .infected{
   border-bottom: 10px solid rgba(0, 0, 255, 0.5);
 }
+.infected h5{
+  color: rgba(0, 0, 255, 0.8);
+}
 .recovered{
   border-bottom: 10px solid rgba(0, 255, 0, 0.5);
+}
+.recovered h5{
+  color: rgba(0, 255, 0, 0.7);
 }
 .deaths{
   border-bottom: 10px solid rgba(255, 0, 0, 0.5);
 }
-
+.deaths h5{
+  color: rgba(255, 0, 0, 0.7);
+}
 @media (max-width: 770px){
   .card{
     margin: 2% 0 !important;
