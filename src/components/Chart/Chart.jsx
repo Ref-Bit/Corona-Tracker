@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { fetchDailyData } from '../../API';
+import i18next from 'i18next';
+import { fetchDailyData } from '../../api';
 import { Line, Bar } from 'react-chartjs-2';
 import Styles from './Chart.module.css';
+import '../../config';
 
 const Chart = ({ data: {confirmed, recovered, deaths}, country }) => {
   const [ dailyData, setDailyData ] = useState([]);
@@ -19,14 +21,14 @@ const Chart = ({ data: {confirmed, recovered, deaths}, country }) => {
           labels: dailyData.map(({ date }) => date),
           datasets: [{
             data: dailyData.map(({ confirmed }) => confirmed),
-            label: 'Infected',
+            label: i18next.t('infected.title'),
             borderColor: '#3333ff',
             fill: true
           }, {
             data: dailyData.map(({ deaths }) => deaths),
-            label: 'Deaths',
+            label: i18next.t('deaths.title'),
             borderColor: 'red',
-            backgroundColor: 'rgba(255, 0 ,0, 0.5)',
+            backgroundColor: 'rgba(255, 0, 0, 0.5)',
             fill: true
           }],
         }}
@@ -38,9 +40,9 @@ const Chart = ({ data: {confirmed, recovered, deaths}, country }) => {
     ? (
       <Bar
         data={{
-          labels: ['Infected', 'Recovered', 'Deaths'],
+          labels: [i18next.t('infected.title'), i18next.t('recovered.title'), i18next.t('deaths.title')],
           datasets: [{
-            label: 'People',
+            label: i18next.t('labels.people'),
             backgroundColor: [
               'rgba(0, 0, 255, 0.5)',
               'rgba(0, 255, 0, 0.5)',
@@ -51,8 +53,7 @@ const Chart = ({ data: {confirmed, recovered, deaths}, country }) => {
         }}
         options={{
           legend: { display: false },
-          title: { display: true, text: `Current state in ${country}` },
-
+          title: { display: true, text: [i18next.t('desc.country'), i18next.t(country)] },
         }} 
       />
     ) : null
