@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import { withTranslation } from 'react-i18next';
 import { ThemeProvider } from '@material-ui/core/styles'
 import { Cards, Chart, CountryPicker } from './components'
-import { theme, dev, ip } from './config';
+import { theme, dev } from './config';
 import { fetchData } from './api';
 import Lang from './switchLanguage'
 import Styles from './App.module.css';
@@ -32,7 +33,14 @@ class App extends React.Component{
 
       this.setState({code})
       this.setState({country_flag})
-
+      switch (code) {
+        case 'en':moment.locale('en-ca');break;
+        case 'hy':moment.locale('hy-am');break;
+        case 'tl':moment.locale('tl-ph');break;
+        case 'zh':moment.locale('zh-cn');break;
+        default:moment.locale(code);
+          break;
+      }
       Lang.prototype.switchLang(code);
     })      
     .catch((err) => console.log(err));
@@ -47,7 +55,7 @@ class App extends React.Component{
   
   render(){
     const { data, country, code } = this.state;
-    const { t } = this.props;
+    // const { t } = this.props;
 
     return(
       <ThemeProvider theme={theme}>
