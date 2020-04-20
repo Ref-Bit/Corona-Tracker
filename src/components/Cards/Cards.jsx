@@ -10,7 +10,14 @@ const Cards = ( {data:{ confirmed, recovered, deaths, lastUpdate }, locale}) => 
   if(!confirmed){
     return 'Loading...';
   }
-
+  switch (locale) {
+    case 'en':moment.locale('en-ca');break;
+    case 'hy':moment.locale('hy-am');break;
+    case 'tl':moment.locale('tl-ph');break;
+    case 'zh':moment.locale('zh-cn');break;
+    default:moment.locale(locale);
+      break;
+  }
   return (
       <div className={Styles.container}>
         <Grid container spacing={3} justify="center">

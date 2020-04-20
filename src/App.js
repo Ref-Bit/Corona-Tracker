@@ -16,7 +16,7 @@ class App extends React.Component{
       data: {},
       country: '',
       code:'',
-      country_flag: ''
+      flag: ''
     }
   } 
   async componentDidMount(){
@@ -24,24 +24,19 @@ class App extends React.Component{
     this.setState({data: fetchedData});
     this.fetchIP();
   }
-
   fetchIP = () => {
-    axios.get(`http://api.ipstack.com/check?access_key=${process.env.REACT_APP_IP_SERVICE_PROVIDER_API_KEY}&security=1`)
+    axios.get('https://freegeoip.app/json/')
     .then((res) => {
-      const { code } = res.data.location.languages[0]
-      const { country_flag } = res.data.location
+      const { country_code } = res.data;
+      axios.get(`https://restcountries.eu/rest/v2/alpha/${country_code}`).then((res) => {
+        const code = res.data.languages[0].iso639_1
+        const { flag } = res.data;
+        this.setState({code})
+        this.setState({flag})
 
-      this.setState({code})
-      this.setState({country_flag})
-      switch (code) {
-        case 'en':moment.locale('en-ca');break;
-        case 'hy':moment.locale('hy-am');break;
-        case 'tl':moment.locale('tl-ph');break;
-        case 'zh':moment.locale('zh-cn');break;
-        default:moment.locale(code);
-          break;
-      }
-      Lang.prototype.switchLang(code);
+        Lang.prototype.switchLang(code);
+
+      }).catch((err) => console.log(err))
     })      
     .catch((err) => console.log(err));
   } 
