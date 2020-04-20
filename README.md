@@ -12,12 +12,11 @@ See the instructions below to get you a copy of the project up and running on yo
 
 - [covid19.mathdro.api](https://covid19.mathdro.id/api) - Covid19 Mathdro API
 - [i18next](https://www.i18next.com/) - Internationalization Framework 
-- [ipstack](https://ipstack.com) - Free IP Geolocation API
+- [freegeoip](https://freegeoip.app/) - Free IP Geolocation API
+- [REST COUNTRIES](https://restcountries.eu/) - Get information about countries via a RESTful API
 - [React.js](https://reactjs.org/) - Javascript Frontend Framework
 
 
 #### Getting Started
 
-1. Register an account at **[ipstack](https://ipstack.com)** to get a private API key and impelment it in `.env.example`.
-2. Save `.env.example` into new file called `.env`.
-3. Run `npm install && npm start` to run the app successfully.
+- Run `npm install && npm start` to run the app successfully.
